@@ -29,7 +29,7 @@ if "login_error" not in st.session_state:
 
 # --------- Halaman login ----------
 if not st.session_state.authenticated:
-    st.markdown("# 🔐 Masuk untuk melihat aplikasi")
+    st.markdown("# 🔐 Masuk untuk melihat")
     st.write("Masukkan password untuk membuka seluruh tampilan aplikasi.")
 
     cols = st.columns([3, 1])

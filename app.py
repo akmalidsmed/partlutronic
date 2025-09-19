@@ -1,7 +1,6 @@
 # Streamlit app: Sparepart's Lutronic
-# File: streamlit_spareparts_lutronic_with_password.py
-# Petunjuk: simpan file ini di folder yang sama dengan "Combined_Spare_Part_List.xlsx"
-# Jalankan: streamlit run streamlit_spareparts_lutronic_with_password.py
+# File: app.py
+# Jalankan: streamlit run app.py
 
 import streamlit as st
 import pandas as pd
@@ -29,7 +28,7 @@ if "login_error" not in st.session_state:
 
 # --------- Halaman login ----------
 if not st.session_state.authenticated:
-    st.markdown("# 🔐 Masuk untuk melihat")
+    st.markdown("# 🔐 Masuk untuk melihat aplikasi")
     st.write("Masukkan password untuk membuka seluruh tampilan aplikasi.")
 
     cols = st.columns([3, 1])
@@ -42,7 +41,7 @@ if not st.session_state.authenticated:
         if check_password(pwd):
             st.session_state.authenticated = True
             st.session_state.login_error = False
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.session_state.login_error = True
 
@@ -56,7 +55,7 @@ else:
     st.sidebar.markdown("## 🔓 Status: Terautentikasi")
     if st.sidebar.button("Logout"):
         st.session_state.authenticated = False
-        st.experimental_rerun()
+        st.rerun()
 
     st.title("🔧 Sparepart's Lutronic")
 
@@ -93,7 +92,6 @@ else:
         buffer = BytesIO()
         with pd.ExcelWriter(buffer, engine="xlsxwriter") as writer:
             df_input.to_excel(writer, index=False, sheet_name="Results")
-            writer.save()
         return buffer.getvalue()
 
     if not filtered_df.empty:
